@@ -56,6 +56,13 @@ class PendapatanController extends Controller
                 return back();
             }    
 
+            $cek = Pendapatan::where('bulan', $request->bulan)->where('tahun', $request->tahun)->first();
+
+            if($cek){
+                Alert::error('Gagal', 'Data Gagal Ditambahkan, Data Sudah Ada');
+                return back();
+            }
+
             Pendapatan::create($request->all());
 
             Alert::success('Berhasil', 'Data Berhasil Ditambahkan');
