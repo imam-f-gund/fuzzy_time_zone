@@ -2,7 +2,7 @@
     <div class="sidebar-start">
         <div class="sidebar-head">
             <a href="/dashboard" class="logo-wrapper text-center" title="Home">
-                <span class="sr-only">Home</span>
+                <span class="sr-only text--50">Home</span>
                 <h5>Prediksi Pendapatan Kaos</h5>
                 {{-- <img src="{{ asset('img/logo.png') }}" alt="Logo" class="icon-logo" /> --}}
 
@@ -22,12 +22,8 @@
                             aria-hidden="true"></span>Pendapatan</a>
                 </li>
                 <li>
-                    <a href="{{ url('perhitungan') }}"><span class="icon fa-solid fa-diagram-project fa-xl"
-                            aria-hidden="true"></span>Perhitungan</a>
-                </li>
-                <li>
-                    <a href="{{ url('perangkingan') }}"><span class="icon fa-solid fa-ranking-star fa-xl"
-                            aria-hidden="true"></span>Perangkingan</a>
+                    <a href="{{ url('cek-pendapatan') }}"><span class="icon fa-solid fa-ranking-star fa-xl"
+                            aria-hidden="true"></span>Cek Pendapatan</a>
                 </li>
             </ul>
             {{-- <span class="system-menu__title">system</span> --}}

@@ -2,7 +2,7 @@
 namespace App\Metode;
 
 class fuzzy{
-    public function nilaiMinMax($data){
+    public function nilaiPrediksi($data){
         $jmlkelas = count($data);
         $pendapatan = [];
 

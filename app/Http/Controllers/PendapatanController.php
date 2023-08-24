@@ -131,11 +131,11 @@ class PendapatanController extends Controller
         return back();
     }
 
-    public function cek(){
+    public function cek_pendapatan(){
         $fuzzy = new fuzzy;
         $data = Pendapatan::all();
 
-        $hasil = $fuzzy->nilaiMinMax($data);
+        $hasil = $fuzzy->nilaiPrediksi($data);
         dd($hasil);
     }
 }

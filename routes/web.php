@@ -34,4 +34,4 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('pendapatan', PendapatanController::class);
 
-Route::get('cek', [PendapatanController::class, 'cek']);
+Route::get('cek-pendapatan', [PendapatanController::class, 'cek_pendapatan']);

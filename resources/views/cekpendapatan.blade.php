@@ -56,7 +56,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ubahDataPendapatanLabel">Ubah Data</h5>
+                        <h5 class="modal-title" id="ubahDataPendapatanLabel">Ubah Data Guru</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ url('pendapatan') }}" method="POST">
@@ -103,7 +103,7 @@
 
         <div class="row mb-3">
             <div class="col">
-                <h2 class="main-title my-auto">Data Pendapatan</h2>
+                <h2 class="main-title my-auto">Data Guru</h2>
             </div>
             <div class="col">
                 <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
