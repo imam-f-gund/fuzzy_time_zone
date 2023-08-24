@@ -8,9 +8,9 @@
 </p>
 
 ## install 
-- clone https://github.com/imam-f-gund/fuzzy_time_zone.git command
-- composer install command
-- php artisan key:generate command
+- clone https://github.com/imam-f-gund/fuzzy_time_zone.git
+- composer install
+- php artisan key:generate
 - php artisan migrate:fresh --seed
 - php artisan serve
 - username = admin
