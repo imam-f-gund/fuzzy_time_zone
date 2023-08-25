@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Metode\fuzzy;
 use App\Models\Pendapatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
-
-use App\Metode\fuzzy;
 
 class PendapatanController extends Controller
 {
@@ -44,29 +43,29 @@ class PendapatanController extends Controller
     public function store(Request $request)
     {
         //
-            $validator = Validator::make($request->all(), [ 
-                'bulan' => 'required',
-                'tahun' => 'required',
-                'pendapatan' => 'required',
-            ]);
+        $validator = Validator::make($request->all(), [
+            'bulan' => 'required',
+            'tahun' => 'required',
+            'pendapatan' => 'required',
+        ]);
 
-            if ($validator->fails()) {
-          
-                Alert::error('Gagal', 'Data Gagal Ditambahkan'.$validator->errors());
-                return back();
-            }    
+        if ($validator->fails()) {
 
-            $cek = Pendapatan::where('bulan', $request->bulan)->where('tahun', $request->tahun)->first();
-
-            if($cek){
-                Alert::error('Gagal', 'Data Gagal Ditambahkan, Data Sudah Ada');
-                return back();
-            }
-
-            Pendapatan::create($request->all());
-
-            Alert::success('Berhasil', 'Data Berhasil Ditambahkan');
+            Alert::error('Gagal', 'Data Gagal Ditambahkan' . $validator->errors());
             return back();
+        }
+
+        $cek = Pendapatan::where('bulan', $request->bulan)->where('tahun', $request->tahun)->first();
+
+        if ($cek) {
+            Alert::error('Gagal', 'Data Gagal Ditambahkan, Data Sudah Ada');
+            return back();
+        }
+
+        Pendapatan::create($request->all());
+
+        Alert::success('Berhasil', 'Data Berhasil Ditambahkan');
+        return back();
 
     }
 
@@ -103,19 +102,19 @@ class PendapatanController extends Controller
     {
         //
 
-        $validator = Validator::make($request->all(), [ 
+        $validator = Validator::make($request->all(), [
             'bulan' => 'required',
             'tahun' => 'required',
             'pendapatan' => 'required',
         ]);
 
         if ($validator->fails()) {
-      
-            Alert::error('Gagal', 'Data Gagal Diubah'.$validator->errors());
-            return back();
-        }    
 
-        $pendapatan=Pendapatan::find($id);
+            Alert::error('Gagal', 'Data Gagal Diubah' . $validator->errors());
+            return back();
+        }
+
+        $pendapatan = Pendapatan::find($id);
         $pendapatan->update($request->all());
 
         Alert::success('Berhasil', 'Data Berhasil Diubah');
@@ -138,12 +137,14 @@ class PendapatanController extends Controller
         return back();
     }
 
-    public function cek_pendapatan(){
+    public function cek_pendapatan()
+    {
         $fuzzy = new fuzzy;
         $data = Pendapatan::all();
 
         $hasil = $fuzzy->nilaiPrediksi($data);
-        
-        return view('cekpendapatan', compact('hasil'));
+        $prediksi = $fuzzy->prediksi($hasil);
+
+        return view('cekpendapatan', compact('hasil', 'prediksi'));
     }
 }

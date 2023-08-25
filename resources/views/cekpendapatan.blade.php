@@ -4,7 +4,8 @@
     <div class="container">
 
 
-        <div class="modal fade" id="tambahDataPendapatan" tabindex="-1" aria-labelledby="tambahDataPendapatanLabel" aria-hidden="true">
+        <div class="modal fade" id="tambahDataPendapatan" tabindex="-1" aria-labelledby="tambahDataPendapatanLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -16,7 +17,7 @@
                         <div class="modal-body">
                             <div class="form-group mb-2">
                                 <label for="bulan">Bulan</label>
-                               <select class="form-select" id="bulan" name="bulan">
+                                <select class="form-select" id="bulan" name="bulan">
                                     <option selected value="">Pilih bulan</option>
                                     <option value="Januari">Januari</option>
                                     <option value="Febuari">Febuari</option>
@@ -30,18 +31,18 @@
                                     <option value="Oktober">Oktober</option>
                                     <option value="November ">November </option>
                                     <option value="Desember">Desember</option>
-                                
+
                                 </select>
-                            </div> 
+                            </div>
                             <div class="form-group mb-2">
                                 <label for="tahun">Tahun</label>
                                 <input type="number" class="form-control" id="tahun" name="tahun" placeholder="2023">
-                            </div> 
+                            </div>
                             <div class="form-group mb-2">
                                 <label for="pendapatan">Pendapatan</label>
                                 <input type="number" class="form-control" id="pendapatan" name="pendapatan">
                             </div>
-    
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -52,7 +53,8 @@
             </div>
         </div>
 
-        <div class="modal fade" id="ubahDataPendapatan" tabindex="-1" aria-labelledby="ubahDataPendapatanLabel" aria-hidden="true">
+        <div class="modal fade" id="ubahDataPendapatan" tabindex="-1" aria-labelledby="ubahDataPendapatanLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -65,7 +67,7 @@
                         <div class="modal-body">
                             <div class="form-group mb-2">
                                 <label for="bulan">Bulan</label>
-                               <select class="form-select" id="bulan" name="bulan">
+                                <select class="form-select" id="bulan" name="bulan">
                                     <option selected value="">Pilih bulan</option>
                                     <option value="Januari">Januari</option>
                                     <option value="Febuari">Febuari</option>
@@ -79,13 +81,13 @@
                                     <option value="Oktober">Oktober</option>
                                     <option value="November ">November </option>
                                     <option value="Desember">Desember</option>
-                                
+
                                 </select>
-                            </div> 
+                            </div>
                             <div class="form-group mb-2">
                                 <label for="tahun">Tahun</label>
                                 <input type="number" class="form-control" id="tahun" name="tahun">
-                            </div> 
+                            </div>
                             <div class="form-group mb-2">
                                 <label for="pendapatan">Pendapatan</label>
                                 <input type="number" class="form-control" id="pendapatan" name="pendapatan">
@@ -118,7 +120,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="dataTable" class="table table-stripped table-bordered" style="width:100%">
+                            <table id="dataTablePerhitungan" class="table table-stripped table-bordered"
+                                style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -134,18 +137,28 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($hasil as $datas)
+                                    @foreach ($hasil as $key => $datas)
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $datas['bulan'] }}</td>
                                             <td>{{ $datas['tahun'] }}</td>
                                             <td>{{ $datas['pendapatan'] }}</td>
                                             <td>{{ strtoupper($datas['fuzzyfikasi']) }}</td>
-                                            <td>{{ $datas['nilai_flr'] }}</td>  
-                                            <td>peramalan</td>
-                                           
+                                            <td>{{ round($datas['nilai_flr']) }}</td>
+                                            <td>
+                                                {{ $loop->iteration == 1 ? 'NA' : round($hasil[$key - 1]['nilai_flr']) }}
+                                            </td>
                                         </tr>
                                     @endforeach
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $prediksi['bulan'] }}</td>
+                                        <td>{{ $prediksi['tahun'] }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{ round($prediksi['hasil_peramalan']) }}</td>
+                                    </tr>
                                 </tbody>
 
                             </table>

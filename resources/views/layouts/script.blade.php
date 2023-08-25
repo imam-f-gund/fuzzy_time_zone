@@ -25,11 +25,16 @@
     });
 
     $(document).ready(function() {
-        $(".dataTablePerhitungan").DataTable({
+        $("#dataTablePerhitungan").DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Indonesian.json"
             },
-            "ordering": true
+            "ordering": false,
+            "pageLength": 50,
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }],
         });
     });
 </script>

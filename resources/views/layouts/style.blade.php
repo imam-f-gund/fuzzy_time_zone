@@ -19,4 +19,11 @@
     input {
         border: 1px solid #ced4da !important;
     }
+
+    .logo-wrapper h4 {
+        font-weight: 600;
+        color: #fff;
+        margin: 0;
+        line-height: 1.5;
+    }
 </style>

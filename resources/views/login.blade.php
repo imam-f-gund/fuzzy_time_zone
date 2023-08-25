@@ -60,6 +60,8 @@
     <script src="{{ asset('plugins/feather.min.js') }}"></script>
     <!-- Custom scripts -->
     <script src="{{ asset('js/script.js') }}"></script>
+
+    @include('layouts.script')
 </body>
 
 </html>
