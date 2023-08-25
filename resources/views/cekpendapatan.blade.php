@@ -140,7 +140,7 @@
                                             <td>{{ $datas['bulan'] }}</td>
                                             <td>{{ $datas['tahun'] }}</td>
                                             <td>{{ $datas['pendapatan'] }}</td>
-                                            <td>{{ $datas['fuzzyfikasi'] }}</td>
+                                            <td>{{ strtoupper($datas['fuzzyfikasi']) }}</td>
                                             <td>{{ $datas['nilai_flr'] }}</td>  
                                             <td>peramalan</td>
                                            
