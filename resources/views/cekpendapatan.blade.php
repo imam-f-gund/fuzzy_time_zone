@@ -103,14 +103,14 @@
 
         <div class="row mb-3">
             <div class="col">
-                <h2 class="main-title my-auto">Data Guru</h2>
+                <h2 class="main-title my-auto">Prediksi Peramalan</h2>
             </div>
-            <div class="col">
+            {{-- <div class="col">
                 <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
                     data-bs-target="#tambahDataPendapatan">
                     Tambah
                 </button>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row">
@@ -125,36 +125,25 @@
                                         <th>Bulan</th>
                                         <th>Tahun</th>
                                         <th>Pendapatan</th>
-                                        <th>Aksi</th>
+                                        <th>Fuzzyfikasi</th>
+                                        <th>Nilai FLR</th>
+                                        <th>Ramalan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($data as $datas)
+                                    @foreach ($hasil as $datas)
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $datas->bulan }}</td>
-                                            <td>{{ $datas->tahun }}</td>
-                                            <td>{{ $datas->pendapatan }}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-warning btn-sm"
-                                                    onclick="fungsiEdit('{{ $datas->id }}|{{ $datas->bulan }}|{{ $datas->tahun }}|{{ $datas->pendapatan }}')"
-                                                    data-bs-toggle="modal" data-bs-target="#ubahDataPendapatan">
-                                                    <i class="fa fa-edit">Edit</i>
-                                                </button>
-
-                                                <form action="{{ url('pendapatan/' . $datas->id) }}" class="d-inline"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit" class="btn btn-sm btn-danger btn-delete">
-                                                        <i class="fa fa-trash">Hapus</i>
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            <td>{{ $datas['bulan'] }}</td>
+                                            <td>{{ $datas['tahun'] }}</td>
+                                            <td>{{ $datas['pendapatan'] }}</td>
+                                            <td>{{ $datas['fuzzyfikasi'] }}</td>
+                                            <td>{{ $datas['nilai_flr'] }}</td>  
+                                            <td>peramalan</td>
+                                           
                                         </tr>
                                     @endforeach
                                 </tbody>

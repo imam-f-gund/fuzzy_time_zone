@@ -5,9 +5,14 @@ class fuzzy{
     public function nilaiPrediksi($data){
         $jmlkelas = count($data);
         $pendapatan = [];
-
+        $datas = [];
+        
         foreach ($data as $key => $value) {
           $pendapatan[] = $value['pendapatan'];
+          $datas[]=[
+            'bulan' => $value['bulan'],
+            'tahun' => $value['tahun'],
+          ];
         }
 
         $banyak_kelas = 1+3.3*log10($jmlkelas);
@@ -21,11 +26,11 @@ class fuzzy{
             'rentang_kelas' => $rentang_kelas,
             'interval_kelas' =>$interval_kelas
         ];
-
-       $this->intervalBaru($pendapatan,$return);
+      
+      return $this->intervalBaru($pendapatan,$return, $datas);
     }
 
-    public function intervalBaru($pendapatan,$data){
+    public function intervalBaru($pendapatan,$data, $datalain){
         $interval = [];
         $result = [];
         $result_interval = [];
@@ -92,11 +97,11 @@ class fuzzy{
             }
             
        }
-       $this->fuzzyfikasi($pendapatan,$interval, $hasil);
+       return $this->fuzzyfikasi($pendapatan,$interval, $hasil, $datalain);
     
     }
 
-    public function fuzzyfikasi($pendapatan,$interval, $hasil){
+    public function fuzzyfikasi($pendapatan,$interval, $hasil, $datalain){
         $fuzzy = [];
        
         foreach ($pendapatan as $key => $value) {
@@ -134,11 +139,11 @@ class fuzzy{
           }
         }
 
-        $this->nilaiFLRFLRG($fuzzy, $hasil);
+        return $this->nilaiFLRFLRG($fuzzy, $hasil, $datalain);
      
     }
 
-    public function nilaiFLRFLRG($fuzzy, $hasil_interval){
+    public function nilaiFLRFLRG($fuzzy, $hasil_interval, $datalain){
         $arr = ['a1','a2','a3','a4','a5','a6'];
         $flr =[];
         $flr2 = [];
@@ -334,9 +339,25 @@ class fuzzy{
             'a5' => $rest_a5/count($flrg5),
             'a6' => $rest_a6/count($flrg6),
         ];
-
-        dd($hasil_flrg_res);
-       
-       
+        $res = [];
+        foreach ($fuzzy as $keys => $items) {
+         
+            foreach ($hasil_flrg_res as $key => $val) {
+                if ($items['Fuzzyfikasi'] == $key) {
+                    $res[]=[
+                        'tahun'=>$datalain[$keys]['tahun'],
+                        'bulan'=>$datalain[$keys]['bulan'],
+                        'pendapatan'=>$items['pendapatan'],
+                        'fuzzyfikasi'=>$key,
+                        'nilai_flr'=>$val
+                    ];
+                }
+              
+            }
+            
+        }
+        
+        return $res;
     }
+
 }

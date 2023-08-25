@@ -143,6 +143,7 @@ class PendapatanController extends Controller
         $data = Pendapatan::all();
 
         $hasil = $fuzzy->nilaiPrediksi($data);
-        dd($hasil);
+        
+        return view('cekpendapatan', compact('hasil'));
     }
 }

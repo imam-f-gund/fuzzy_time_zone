@@ -3,7 +3,7 @@
         <div class="sidebar-head">
             <a href="/dashboard" class="logo-wrapper text-center" title="Home">
                 <span class="sr-only text--50">Home</span>
-                <h5>Prediksi Pendapatan Kaos</h5>
+                <h4>Prediksi Pendapatan Kaos</h4>
                 {{-- <img src="{{ asset('img/logo.png') }}" alt="Logo" class="icon-logo" /> --}}
 
             </a>
