@@ -14,6 +14,7 @@ class fuzzy
             $datas[] = [
                 'bulan' => $value['bulan'],
                 'tahun' => $value['tahun'],
+                'id' => $value['id'],
             ];
         }
 
@@ -28,7 +29,7 @@ class fuzzy
             'rentang_kelas' => $rentang_kelas,
             'interval_kelas' => $interval_kelas,
         ];
-
+    
         return $this->intervalBaru($pendapatan, $return, $datas);
     }
 
@@ -148,6 +149,7 @@ class fuzzy
 
     public function nilaiFLRFLRG($fuzzy, $hasil_interval, $datalain)
     {
+       
         $arr = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6'];
         $flr = [];
         $flr2 = [];
@@ -370,12 +372,13 @@ class fuzzy
             11 => 'November',
             12 => 'Desember',
         ];
-
+        
         $res = [];
         foreach ($fuzzy as $keys => $items) {
             foreach ($hasil_flrg_res as $key => $val) {
                 if ($items['Fuzzyfikasi'] == $key) {
                     $res[] = [
+                        'id' => $datalain[$keys]['id'],
                         'tahun' => $datalain[$keys]['tahun'],
                         'bulan' => $datalain[$keys]['bulan'],
                         'index_bulan' => array_search($datalain[$keys]['bulan'], $bulan),

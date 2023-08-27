@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Metode\fuzzy;
+use Illuminate\Http\Request;
 use App\Models\Pendapatan;
 use App\Models\DetailPendapatan;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class PendapatanController extends Controller
+class DetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-        $data = Pendapatan::all();
-
-        return view('pendapatan', compact('data'));
-
+    public function index($id)
+    {   
+       
     }
 
     /**
@@ -42,12 +37,13 @@ class PendapatanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {  
         $validator = Validator::make($request->all(), [
-            'bulan' => 'required',
-            'tahun' => 'required',
-            'pendapatan' => 'required',
+            'ukuran' => 'required',
+            'warna' => 'required',
+            'penjualan' => 'required',
+            'jenis_kaos' => 'required',
+            'pendapatan' => 'required|nullable',
         ]);
 
         if ($validator->fails()) {
@@ -56,14 +52,7 @@ class PendapatanController extends Controller
             return back();
         }
 
-        $cek = Pendapatan::where('bulan', $request->bulan)->where('tahun', $request->tahun)->first();
-
-        if ($cek) {
-            Alert::error('Gagal', 'Data Gagal Ditambahkan, Data Sudah Ada');
-            return back();
-        }
-
-        Pendapatan::create($request->all());
+        DetailPendapatan::create($request->all());
 
         Alert::success('Berhasil', 'Data Berhasil Ditambahkan');
         return back();
@@ -73,21 +62,25 @@ class PendapatanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pendapatan  $pendapatan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $requst ,$id)
+    public function show($id)
     {
-    
+        //
+        $data = DetailPendapatan::where('pendapatan_id', $id)->get();
+        $pendapatan = Pendapatan::where('id',$id)->first();
+       
+        return view('detailpendapatan',compact('data','pendapatan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pendapatan  $pendapatan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pendapatan $pendapatan)
+    public function edit($id)
     {
         //
     }
@@ -96,56 +89,46 @@ class PendapatanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pendapatan  $pendapatan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //
-
         $validator = Validator::make($request->all(), [
-            'bulan' => 'required',
-            'tahun' => 'required',
-            'pendapatan' => 'required',
+            'ukuran' => 'required',
+            'warna' => 'required',
+            'penjualan' => 'required',
+            'jenis_kaos' => 'required',
+            'pendapatan' => 'required|nullable',
+           
         ]);
 
         if ($validator->fails()) {
 
-            Alert::error('Gagal', 'Data Gagal Diubah' . $validator->errors());
+            Alert::error('Gagal', 'Data Gagal Ditambahkan' . $validator->errors());
             return back();
         }
 
-        $pendapatan = Pendapatan::find($id);
-        $pendapatan->update($request->all());
+        $detailpendapatan = DetailPendapatan::find($id);
+        $detailpendapatan->update($request->all());
 
         Alert::success('Berhasil', 'Data Berhasil Diubah');
         return back();
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pendapatan  $pendapatan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
-        Pendapatan::destroy($id);
+        
+        DetailPendapatan::destroy($id);
 
         Alert::success('Berhasil', 'Data Berhasil Didapus');
         return back();
-    }
-
-    public function cek_pendapatan()
-    {
-        $fuzzy = new fuzzy;
-        $data = Pendapatan::all();
-
-        $hasil = $fuzzy->nilaiPrediksi($data);
-        $prediksi = $fuzzy->prediksi($hasil);
-
-        return view('cekpendapatan', compact('hasil', 'prediksi'));
     }
 }

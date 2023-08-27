@@ -140,13 +140,14 @@
                                     @foreach ($hasil as $key => $datas)
                                         <tr>
                                             <td>{{ $no++ }}</td>
+                                            {{-- <td><a href="{{ url('pendapatan/'.$datas['id']) }}">{{ $datas['bulan'] }}</a></td> --}}
                                             <td>{{ $datas['bulan'] }}</td>
                                             <td>{{ $datas['tahun'] }}</td>
-                                            <td>{{ $datas['pendapatan'] }}</td>
+                                            <td>Rp.{{ number_format($datas['pendapatan'], 0, ",", ".") }}</td>
                                             <td>{{ strtoupper($datas['fuzzyfikasi']) }}</td>
-                                            <td>{{ round($datas['nilai_flr']) }}</td>
+                                            <td>Rp.{{ number_format($datas['nilai_flr'], 0, ",", ".")}}</td>
                                             <td>
-                                                {{ $loop->iteration == 1 ? 'NA' : round($hasil[$key - 1]['nilai_flr']) }}
+                                                {{ $loop->iteration == 1 ? 'NA' : 'Rp.'.number_format($hasil[$key - 1]['nilai_flr'], 0, ",", ".") }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -157,7 +158,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td>{{ round($prediksi['hasil_peramalan']) }}</td>
+                                        <td>Rp.{{number_format($prediksi['hasil_peramalan'], 0, ",", ".") }}</td>
                                     </tr>
                                 </tbody>
 

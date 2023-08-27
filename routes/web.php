@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PendapatanController;
+use App\Http\Controllers\DetailController;
 
 
 /*
@@ -33,5 +34,9 @@ Route::get('dashboard', function () {
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('pendapatan', PendapatanController::class);
+Route::resource('detail', DetailController::class);
+
+Route::get('detail/{id_pendapatan}', [DetailController::class, 'index']);
 
 Route::get('cek-pendapatan', [PendapatanController::class, 'cek_pendapatan']);
+

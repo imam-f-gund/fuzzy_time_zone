@@ -4,45 +4,38 @@
     <div class="container">
 
 
-        <div class="modal fade" id="tambahDataPendapatan" tabindex="-1" aria-labelledby="tambahDataPendapatanLabel"
+        <div class="modal fade" id="tambahDataDetail" tabindex="-1" aria-labelledby="tambahDataDetailLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="tambahDataPendapatanLabel">Tambah Data Pendapatan</h5>
+                        <h5 class="modal-title" id="tambahDataDetailLabel">Tambah Detail Pendapatan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ url('pendapatan') }}" method="POST">
+                    <form action="{{ url('detail') }}" method="POST">
                         @csrf
                         <div class="modal-body">
+                            <input type="hidden" name="pendapatan_id" value="{{$pendapatan->id}}">
                             <div class="form-group mb-2">
-                                <label for="bulan">Bulan</label>
-                                <select class="form-select" id="bulan" name="bulan">
-                                    <option selected value="">Pilih bulan</option>
-                                    <option value="Januari">Januari</option>
-                                    <option value="Febuari">Febuari</option>
-                                    <option value="Maret">Maret</option>
-                                    <option value="April ">April </option>
-                                    <option value="Mei ">Mei </option>
-                                    <option value="Juni">Juni</option>
-                                    <option value="Juli">Juli</option>
-                                    <option value="Agustus">Agustus</option>
-                                    <option value="September">September</option>
-                                    <option value="Oktober">Oktober</option>
-                                    <option value="November ">November </option>
-                                    <option value="Desember">Desember</option>
+                                <label for="ukuran">Ukuran</label>
+                                <input type="text" class="form-control" id="ukuran" name="ukuran" placeholder="S,M,L,XL,XXL">
+                            </div>
 
-                                </select>
+                            <div class="form-group mb-2">
+                                <label for="warna">Warna</label>
+                                <input type="text" class="form-control" id="warna" name="warna" placeholder="Merah">
                             </div>
                             <div class="form-group mb-2">
-                                <label for="tahun">Tahun</label>
-                                <input type="number" class="form-control" id="tahun" name="tahun" placeholder="2023">
-                                <p class="mt-2 text-danger">* contoh : 2023</p>
+                                <label for="penjualan">Data Penjualan</label>
+                                <input type="number" class="form-control" id="penjualan" name="penjualan" placeholder="35">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="jenis_kaos">Jenis Kaos</label>
+                                <input type="text" class="form-control" id="jenis_kaos" name="jenis_kaos" placeholder="Pendek,Panjang">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="pendapatan">Pendapatan</label>
-                                <input type="number" class="form-control" id="pendapatan" name="pendapatan" placeholder="20000000">
-                                <p class="mt-2 text-danger">* contoh : 20000000</p>
+                                <input type="number" class="form-control" id="pendapatan" name="pendapatan" placeholder="20100000">
                             </div>
 
                         </div>
@@ -60,39 +53,34 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ubahDataPendapatanLabel">Ubah Data</h5>
+                        <h5 class="modal-title" id="ubahDataPendapatanLabel">Ubah Detail</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ url('pendapatan') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
+                        
                             <div class="form-group mb-2">
-                                <label for="bulan">Bulan</label>
-                                <select class="form-select" id="bulan" name="bulan">
-                                    <option selected value="">Pilih bulan</option>
-                                    <option value="Januari">Januari</option>
-                                    <option value="Febuari">Febuari</option>
-                                    <option value="Maret">Maret</option>
-                                    <option value="April ">April </option>
-                                    <option value="Mei ">Mei </option>
-                                    <option value="Juni">Juni</option>
-                                    <option value="Juli">Juli</option>
-                                    <option value="Agustus">Agustus</option>
-                                    <option value="September">September</option>
-                                    <option value="Oktober">Oktober</option>
-                                    <option value="November ">November </option>
-                                    <option value="Desember">Desember</option>
+                                <label for="ukuran">Ukuran</label>
+                                <input type="text" class="form-control" id="ukuran" name="ukuran" placeholder="S">
+                            </div>
 
-                                </select>
+                            <div class="form-group mb-2">
+                                <label for="warna">Warna</label>
+                                <input type="text" class="form-control" id="warna" name="warna" placeholder="Merah">
                             </div>
                             <div class="form-group mb-2">
-                                <label for="tahun">Tahun</label>
-                                <input type="number" class="form-control" id="tahun" name="tahun">
+                                <label for="penjualan">Data Penjualan</label>
+                                <input type="number" class="form-control" id="penjualan" name="penjualan" placeholder="35">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="jenis_kaos">Jenis Kaos</label>
+                                <input type="text" class="form-control" id="jenis_kaos" name="jenis_kaos" placeholder="Pendek">
                             </div>
                             <div class="form-group mb-2">
                                 <label for="pendapatan">Pendapatan</label>
-                                <input type="number" class="form-control" id="pendapatan" name="pendapatan">
+                                <input type="number" class="form-control" id="pendapatan" name="pendapatan" placeholder="20100000">
                             </div>
 
                         </div>
@@ -107,11 +95,11 @@
 
         <div class="row mb-3">
             <div class="col">
-                <h2 class="main-title my-auto">Data Pendapatan</h2>
+                <h2 class="main-title my-auto">Data Pendapatan {{$pendapatan->bulan}} - {{$pendapatan->tahun}}</h2>
             </div>
             <div class="col">
                 <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
-                    data-bs-target="#tambahDataPendapatan">
+                    data-bs-target="#tambahDataDetail">
                     Tambah
                 </button>
             </div>
@@ -126,8 +114,10 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Bulan</th>
-                                        <th>Tahun</th>
+                                        <th>Ukuran</th>
+                                        <th>Warna</th>
+                                        <th>Penjualan</th>				
+                                        <th>Jenis Kaos</th>
                                         <th>Pendapatan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -139,20 +129,20 @@
                                     @foreach ($data as $datas)
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $datas->bulan }}</td>
-                                            <td>{{ $datas->tahun }}</td>
+                                            <td>{{ $datas->ukuran }}</td>
+                                            <td>{{ $datas->warna }}</td>
+                                            <td>{{ $datas->penjualan }}</td>
+                                            <td>{{ $datas->jenis_kaos }}</td>
                                             <td>Rp.{{ number_format($datas->pendapatan, 0, ",", ".")}}</td>
-                                            <td class="center">
+                                            <td>
                                                 <button type="button" class="btn btn-warning btn-sm"
-                                                    onclick="fungsiEdit('{{ $datas->id }}|{{ $datas->bulan }}|{{ $datas->tahun }}|{{ $datas->pendapatan }}')"
+                                                    onclick="fungsiEdit('{{ $datas->id }}|{{ $datas->ukuran }}|{{ $datas->warna }}|{{ $datas->penjualan }}|{{ $datas->jenis_kaos }}|{{ $datas->pendapatan }}')"
                                                     data-bs-toggle="modal" data-bs-target="#ubahDataPendapatan">
                                                     <i class="fa fa-edit">Edit</i>
                                                 </button>
-                                                <button type="button" class="btn btn-primary btn-sm">
-                                                    <a href="{{ url('detail/'.$datas['id']) }}">Detail</a>
-                                                </button>
+                                                
 
-                                                <form action="{{ url('pendapatan/' . $datas->id) }}" class="d-inline"
+                                                <form action="{{ url('detail/' . $datas->id) }}" class="d-inline"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -179,10 +169,12 @@
             function fungsiEdit(data) {
                 var data = data.split('|');
                 console.log(data);
-                $('#ubahDataPendapatan form').attr('action', "{{ url('pendapatan') }}/" + data[0]);
-                $('#ubahDataPendapatan .modal-body #bulan').val(data[1]);
-                $('#ubahDataPendapatan .modal-body #tahun').val(data[2]);
-                $('#ubahDataPendapatan .modal-body #pendapatan').val(data[3]);
+                $('#ubahDataPendapatan form').attr('action', "{{ url('detail') }}/" + data[0]);
+                $('#ubahDataPendapatan .modal-body #ukuran').val(data[1]);
+                $('#ubahDataPendapatan .modal-body #warna').val(data[2]);
+                $('#ubahDataPendapatan .modal-body #penjualan').val(data[3]);
+                $('#ubahDataPendapatan .modal-body #jenis_kaos').val(data[4]);
+                $('#ubahDataPendapatan .modal-body #pendapatan').val(data[5]);
                 $('.selectpicker').selectpicker('refresh');
             }
         </script>
